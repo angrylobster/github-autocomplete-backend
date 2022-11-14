@@ -9,8 +9,8 @@ This repository was created using the [Nest](https://github.com/nestjs/nest) fra
 - NPM (v8.19.2)
   - This version of NPM comes included with Node.js (v18.12.1)
 - Environment variables 
-  - You will need the environment variables for Neo4j database
-  - You can setup your own free copy of Neo4j [here](https://neo4j.com/)
+  - You will need the environment variables for the Neo4j database
+  - For running in a local environment, all environment variables will need to be stored in a `.env` file in the root folder of this repository
 
 ## Installation
 Run the installation script to install the required packages with NPM:
@@ -19,6 +19,8 @@ $ npm install
 ```
 
 ## Running the app
+Please ensure that there is `.env` file containing the correct environment variables in the root folder of this repository when running it locally.
+
 You can run a development copy of this app with the following script:
 ```bash
 $ npm run start:dev
