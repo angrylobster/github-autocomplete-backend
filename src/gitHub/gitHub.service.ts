@@ -1,6 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { map } from 'rxjs';
+import { GetGitHubUsersResponse } from './gitHub.interfaces';
 
 @Injectable()
 export class GitHubService {
@@ -8,7 +9,9 @@ export class GitHubService {
 
   getGitHubUsers(query: string) {
     return this.httpService
-      .get('/search/users', { params: { q: encodeURIComponent(query) } })
+      .get<GetGitHubUsersResponse>('/search/users', {
+        params: { q: encodeURIComponent(query) },
+      })
       .pipe(map(({ data }) => data));
   }
 }
