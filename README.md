@@ -1,62 +1,56 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This repository was created using the [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
+## Prerequisites
+
+- Node.js (v18.12.1)
+  - Please refer to [this link](https://nodejs.org/en/download/) to install Node.js
+- NPM (v8.19.2)
+  - This version of NPM comes included with Node.js (v18.12.1)
+- Environment variables 
+  - You will need the environment variables for Neo4j database
+  - You can setup your own free copy of Neo4j [here](https://neo4j.com/)
 
 ## Installation
-
+Run the installation script to install the required packages with NPM:
 ```bash
 $ npm install
 ```
 
 ## Running the app
-
+You can run a development copy of this app with the following script:
 ```bash
-# development
-$ npm run start
-
-# watch mode
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+## Endpoints
+There are 2 endpoints available on this service.
+### GET /github/search/users
+This endpoint is used to retrieve GitHub user search results. 
+| Response Key       | Type    | Description                                                                                                     |
+|--------------------|---------|-----------------------------------------------------------------------------------------------------------------|
+| incomplete_results | boolean | Whether the results list is incomplete or not. Returns true if there are more results that cannot be displayed. |
+| items              | User[]  | An array of users. You can refer to the schema here: https://docs.github.com/en/rest/search#search-users        |
+| total_count        | number  | The total number of results                                                                                     |
 
-```bash
-# unit tests
-$ npm run test
+The request should contain a query string, which is used to search for users.
+| Query Key | Type   | Description                                                            |
+|-----------|--------|------------------------------------------------------------------------|
+| q         | string | This is the query string that will be used to search for GitHub users. |
 
-# e2e tests
-$ npm run test:e2e
+### GET /autocomplete/users
+This endpoint is used to get autocomplete hints for user search queries. By default, only a maximum of 5 results are returned. 
 
-# test coverage
-$ npm run test:cov
-```
+| Response Key | Type   | Description                          |
+|--------------|--------|--------------------------------------|
+| avatar       | string | The URL of the GitHub user's avatar. |
+| username     | string | The GitHub user's username.          |
+
+The request should contain a query string, which is used to search for users.
+| Query Key | Type   | Description                                                            |
+|-----------|--------|------------------------------------------------------------------------|
+| q         | string | This is the query string that will be used to search for GitHub users. |
 
 ## Support
 
